@@ -1,0 +1,25 @@
+{{ template "header" .Header }}
+<h1 class="title">{{ i18n .Locale "Leaderboard" }}</h1>
+<div class="content">
+  <ul class="w-full game text-[8px] md:text-[12px] space-y-2">
+    {{ $locale := .Locale }} {{ range $idx, $val := .Users }}
+    <li
+      class="flex items-center border-2 border-black rounded-2xl bg-gradient-to-l from-red-200 to-yellow-200 p-2 md:p-4"
+    >
+      <span class="w-8">{{ add $idx 1 }})</span>
+      <a class="flex-1/2 hover:underline font-bold truncate" href="/user/{{ .ID }}"
+        >{{ .Username }}</a
+      >
+      <span class="flex-1/2 text-center"
+        >{{ i18n $locale "Record" }}: {{ .Record }}</span
+      >
+      <span
+        class="font-sans italic __locale-time"
+        data-unixtime="{{ .RecordCreatedAt }}"
+      ></span>
+    </li>
+    {{ end }}
+  </ul>
+</div>
+
+{{ template "footer" }}

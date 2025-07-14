@@ -1,0 +1,14 @@
+{{ template "header" .Header }}
+<h1 class="title">
+  {{ i18n .Locale "Chat with"}}&nbsp;<a
+    class="hover:underline"
+    href="/user/{{ .Dialogist.ID }}"
+    >{{ .Dialogist.Username }}</a
+  >
+</h1>
+
+<div class="content">
+  <div class="__island-chat isl"></div>
+</div>
+
+{{ template "footer" }}

@@ -1,0 +1,142 @@
+{{ define "header" }}
+<!DOCTYPE html>
+<html class="h-full">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{{ $title := .Title }}{{ i18n .Locale $title }}</title>
+    <link rel="stylesheet" href="/static/style.css?v={{ .Version }}" />
+    <link
+      rel="icon"
+      href="/static/favicon.ico?v={{ .Version }}"
+      type="image/x-icon"
+    />
+    <script
+      src="/static/scripts/script.js?v={{ .Version }}"
+      defer
+      type="module"
+    ></script>
+    <script
+      src="/static/scripts/islands/islands.js?v={{ .Version }}"
+      defer
+    ></script>
+  </head>
+  <body
+    class="bg-slate-400 poiret text-base h-full w-full flex flex-col items-center"
+  >
+    <header class="w-full flex flex-col lg:flex-row bg-[#e9e7e8] mb-4 lg:mb-8">
+      <div class="w-full lg:w-64 flex">
+        <div class="h-24 lg:h-32 mr-auto">
+          <a class="w-32 overflow-hidden" href="/">
+            <img
+              class="h-24 lg:h-32"
+              src="/static/img/logo.jpg?v={{ .Version }}"
+              alt="logo"
+            />
+          </a>
+        </div>
+        <button
+          id="__menu-btn"
+          class="h-full ml-auto w-32 space-y-2 flex flex-col items-center justify-center lg:hidden"
+        >
+          <span class="block w-8 h-1 bg-gray-800"></span>
+          <span class="block w-8 h-1 bg-gray-800"></span>
+          <span class="block w-8 h-1 bg-gray-800"></span>
+        </button>
+      </div>
+      <nav
+        class="__menu w-full text-lg lg:text-4xl hidden lg:flex lg:items-center"
+      >
+        <ul class="w-full space-y-2 lg:flex lg:items-center lg:justify-between">
+          <li
+            class='text-center hover:font-bold{{ if eq .Title "Global News" }} font-bold{{ end }}'
+          >
+            <a href="/global_news">{{ i18n .Locale "Global News" }}</a>
+          </li>
+          <li
+            class='text-center hover:font-bold{{ if eq .Title "My News" }} font-bold{{ end }}'
+          >
+            <a href="/my_news">{{ i18n .Locale "My News" }}</a>
+          </li>
+          <li
+            class='text-center hover:font-bold{{ if eq .Title "My Page" }} font-bold{{ end }}'
+          >
+            <a href="/my_page">{{ i18n .Locale "My Page" }}</a>
+          </li>
+          <li
+            class='text-center hover:font-bold{{ if eq .Title "My Chats" }} font-bold{{ end }}'
+          >
+            <a
+              href="/my_chats"
+              id="my-chats"
+              {{
+              if
+              .HaveUnreaded
+              }}style="color: red;"
+              {{
+              end
+              }}
+              >{{ i18n .Locale "My Chats" }}</a
+            >
+          </li>
+          <li
+            class='text-center hover:font-bold{{ if eq .Title "Snake Game" }} font-bold{{ end }}'
+          >
+            <a href="/snake">{{ i18n .Locale "Snake Game" }}</a>
+          </li>
+          <li class="text-center mb-2">
+            {{ if.IsLogged }}
+            <a class="btn px-8 lg:py-1 lg:mr-8" href="/logout"
+              >{{ i18n .Locale "Logout"}}</a
+            >
+            {{ else }}
+            <a class="btn px-8 lg:py-2 lg:mr-8" href="/login"
+              >{{ i18n .Locale "Login"}}</a
+            >
+            {{ end }}
+          </li>
+        </ul>
+      </nav>
+    </header>
+    <main class="flex-1 w-full">
+      <div class="hidden lg:block">
+        <img
+          class="fixed -right-2 -bottom-8 -z-10 pointer-events-none h-200 w-auto opacity-60"
+          id="back-img-r"
+          src="/static/img/fiend.png?v={{ .Version }}"
+          alt="background_fiend_right"
+        />
+        <img
+          class="fixed -left-2 -bottom-8 -z-10 pointer-events-none h-200 w-auto opacity-60 -scale-x-100"
+          id="back-img-l"
+          src="/static/img/fiend.png?v={{ .Version }}"
+          alt="background_fiend_left"
+        />
+      </div>
+
+      {{ if ne .Flash "" }}
+      <div class="flex justify-center mb-4">
+        <span
+          class="w-3/5 border-1 border-black bg-gray-800 text-white text-center rounded-md px-4 py-2"
+        >
+          {{ .Flash }}
+        </span>
+      </div>
+      {{ end }} {{ end }} {{ define "footer" }}
+    </main>
+    <footer
+      class="w-full min-h-24 bg-black text-white flex flex-col items-center justify-center"
+    >
+      <div class="game text-xl">2025 Lin Dr41n</div>
+      <div class="italic text-xl">
+        <a class="hover:underline" href="https://t.me/floverlin">Telegram</a>
+        <span>|</span>
+        <a class="hover:underline" href="/set_lang?lang=ru">RU</a>
+        <a class="hover:underline" href="/set_lang?lang=en">EN</a>
+        <a class="hover:underline" href="/set_lang?lang=de">DE</a>
+        <a class="hover:underline" href="/set_lang?lang=ja">JA</a>
+      </div>
+    </footer>
+  </body>
+</html>
+{{ end }}

@@ -1,0 +1,17 @@
+{{ template "header" .Header }}
+
+<h1 class="title">{{ .Status }}</h1>
+
+<div class="content">
+  <img
+    class="w-3/5 mb-8"
+    src="/static/img/error.jpg?v={{ .Version }}"
+    alt="error"
+    height="500"
+  />
+  <a class="hover:underline text-center bg-black rounded-md px-8 py-2 text-white" href="/"
+    >{{ i18n .Locale "back home"}}</a
+  >
+</div>
+
+{{ template "footer" }}

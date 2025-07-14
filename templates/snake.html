@@ -1,0 +1,32 @@
+{{ template "header" .Header }}
+<h1 class="title">{{ i18n .Locale .Header.Title }}</h1>
+<div class="content">
+  <input type="hidden" value="{{ .CSRFToken }}" />
+  <canvas
+    class="rounded-xl bg-slate-400 border-2 border-black mb-4"
+    id="canvas"
+  ></canvas>
+  <div
+    class="flex flex-col w-full gap-2 items-center game text-[8px] lg:text-base"
+  >
+    <div class="whitespace-nowrap">
+      {{ i18n .Locale "score" }}:&nbsp;
+      <span id="score"> 0 </span>
+      &nbsp;| {{ i18n .Locale "speed" }}:&nbsp;
+      <span id="speed"> 0 </span>
+      &nbsp;{{ i18n .Locale "km/h" }}
+    </div>
+    <div class="whitespace-nowrap">
+      {{ i18n .Locale "personal best" }}:&nbsp;
+      <span id="personal-best">{{ .PersonalBest }}</span>
+      &nbsp; | {{ i18n .Locale "global best" }}:&nbsp;
+      <span id="global-best">{{ .GlobalBest }}</span>
+    </div>
+    <a class="hover:underline text-base lg:text-2xl" href="/snake/leaderboard"
+      >{{ i18n .Locale "Leaderboard" }}</a
+    >
+  </div>
+</div>
+
+<script src="/static/games/snake/src/snake.js?v={{ .Version }}"></script>
+{{ template "footer" }}

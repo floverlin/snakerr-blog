@@ -1,0 +1,30 @@
+{
+  "name": "blog-chat",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "vite": "vite build --watch",
+    "tsc": "tsc -p scripts --watch",
+    "tailwind": "tailwindcss -i styles/style.css -o static/style.css --watch",
+    "dev": "npm-run-all --parallel vite tsc tailwind"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "@tailwindcss/cli": "^4.1.10",
+    "@types/react": "^19.1.8",
+    "@types/react-dom": "^19.1.6",
+    "@vitejs/plugin-react": "^4.5.2",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "tailwindcss": "^4.1.10",
+    "typescript": "^5.8.3",
+    "vite": "^6.3.5"
+  },
+  "devDependencies": {
+    "npm-run-all": "^4.1.5"
+  }
+}

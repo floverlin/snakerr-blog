@@ -1,0 +1,12 @@
+{{ template "header" .Header }}
+<h1 class="title">{{ i18n .Locale "Hello, Stranger" }}!</h1>
+<div class="content">
+  <div class="mb-4 text-2xl">
+    {{ i18n .Locale "Current time"}}:&nbsp;<span
+      class="__island-clock isl"
+      data-init-time="{{ .Time }}"
+    ></span>
+  </div>
+  <img class="h-76" src="/static/img/hello.png?v={{ .Version }}" alt="hello" />
+</div>
+{{ template "footer" }}

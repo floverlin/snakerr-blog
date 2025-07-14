@@ -1,0 +1,92 @@
+{{ template "header" .Header}}
+<h1 class="title">{{ i18n .Locale .Header.Title }}</h1>
+<div class="content">
+  <div class="w-full flex gap-4 justify-between mb-8">
+    <div
+      class="w-32 h-32 md:w-48 md:h-48 overflow-hidden border-4 border-black rounded-md"
+    >
+      <img
+        class="w-full h-full object-cover"
+        src="{{ .Avatar }}"
+        alt="avatar"
+      />
+    </div>
+
+    <div class="flex flex-1 min-w-0 flex-col items-end justify-between">
+      <h2 class="text-4xl font-bold w-full truncate text-right">
+        {{ .Username }}
+      </h2>
+      <h3 class="text-2xl italic w-full truncate text-right">
+        {{ .Description }}
+      </h3>
+
+      {{ if eq .Header.Title "My Page" }}
+      <a class="hover:underline text-base text-right" href="/edit"
+        >{{ i18n .Locale "Edit profile info"}}</a
+      >
+      {{ else }}
+      <div class="w-full flex justify-end gap-2 md:gap-8">
+        <div
+          class="__island-follow isl"
+          data-followed="{{ .IsFollowed }}"
+        ></div>
+        <a class="btn px-2 py-1 text-base font-sans" href="/chat/{{ .ID }}"
+          >{{ i18n .Locale "Chat" }}</a
+        >
+      </div>
+      {{ end }}
+    </div>
+  </div>
+
+  <div
+    class="flex w-full items-center justify-around mb-8 font-bold md:text-2xl"
+  >
+    {{ if eq .Header.Title "My Page" }}
+    <a href="my_followers" class="hover:cursor-pointer hover:underline"
+      >{{ i18n .Locale "Subscribers" }}: {{ .SubscribersCount }}</a
+    >
+    <a href="my_follows" class="hover:cursor-pointer hover:underline"
+      >{{i18n .Locale "Subscribes" }}: {{ .SubscribesCount }}</a
+    >
+    {{ else }}
+    <span>{{ i18n .Locale "Subscribers" }}: {{ .SubscribersCount }}</span>
+    <span>{{i18n .Locale "Subscribes" }}: {{ .SubscribesCount }}</span>
+    {{ end }}
+  </div>
+
+  {{ if eq .Header.Title "My Page" }}
+
+  <form
+    class="flex flex-col gap-8 w-full mb-8"
+    method="post"
+    autocomplete="off"
+  >
+    <input type="hidden" name="csrf_token" value="{{ .CSRFToken }}" />
+
+    <input
+      placeholder='{{ i18n .Locale "Post title"}}'
+      id="title"
+      name="title"
+      type="text"
+      maxlength="32"
+      required
+    />
+
+    <input
+      name="body"
+      id="body"
+      type="text"
+      placeholder='{{ i18n .Locale "Post body"}}'
+      required
+    />
+
+    <button class="btn md:py-2 md:text-xl" type="submit">
+      {{ i18n .Locale "Submit"}}
+    </button>
+  </form>
+
+  {{ end }} {{ if gt (len .Posts) 0 }} {{ template "post list" .Posts}}
+</div>
+{{template "paginate" . }} {{ else }}
+<h1 class="text-4xl font-bold text-center">{{ i18n .Locale "No posts"}}</h1>
+{{ end }} {{ template "footer" }}

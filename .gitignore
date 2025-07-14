@@ -1,0 +1,8 @@
+prometheus_data
+grafana_data
+.env
+*.db
+uploads/*
+static/**/*.js
+static/**/*.css
+node_modules
