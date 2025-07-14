@@ -47,7 +47,6 @@ COPY ./templates ./templates
 COPY ./static ./static
 COPY ./migrations ./migrations
 COPY config.json ./
-COPY .env ./
 
 RUN mkdir ./database
 RUN mkdir ./uploads
