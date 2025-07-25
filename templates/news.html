@@ -1,0 +1,8 @@
+{{ template "header" .Header }} {{ if eq (len .Posts) 0 }}
+<h1 class="title">{{ i18n .Locale "No posts"}}</h1>
+{{ else }}
+<h1 class="title">
+  {{ $title := .Header.Title }}{{ i18n .Locale $title }}
+</h1>
+<div class="content">{{ template "post list" .Posts}}</div>
+{{ template "paginate" .}} {{ end }} {{ template "footer" }}

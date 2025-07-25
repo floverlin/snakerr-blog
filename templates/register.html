@@ -1,0 +1,40 @@
+{{ template "header" .Header }}
+
+<h1 class="title">{{ i18n .Locale "Register" }}</h1>
+<div class="content">
+  <form class="flex flex-col gap-8 w-4/5" method="post">
+    <input type="hidden" name="csrf_token" value="{{ .CSRFToken }}" />
+
+    <input
+      placeholder='{{ i18n .Locale "Email"}}'
+      id="email"
+      name="email"
+      type="email"
+      required
+    />
+
+    <input
+      placeholder='{{ i18n .Locale "Username"}}'
+      id="username"
+      name="username"
+      type="text"
+      autocomplete="off"
+      required
+    />
+    <input
+      placeholder='{{ i18n .Locale "Password"}}'
+      id="password"
+      name="password"
+      type="password"
+      required
+    />
+    <button class="btn md:py-2 md:text-xl" type="submit">
+      {{ i18n .Locale "Submit"}}
+    </button>
+    <a class="hover:underline italic text-xl text-center" href="/login"
+      >{{ i18n .Locale "already have an account?" }}</a
+    >
+  </form>
+</div>
+
+{{ template "footer" }}

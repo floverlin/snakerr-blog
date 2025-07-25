@@ -1,0 +1,35 @@
+{{ template "header" .Header}} {{ if eq (len .Users) 0 }}
+<h1 class="title">{{ i18n .Locale "Empty"}}</h1>
+{{ else }}
+<h1 class="title">{{ $title := .Header.Title }}{{ i18n .Locale $title }}</h1>
+<div class="content">
+  <ul class="w-full space-y-4">
+    {{ range .Users }}
+    <li>
+      <div
+        class="flex items-center border-2 gap-4 border-black bg-slate-200 rounded-2xl p-2 md:p-8 w-full"
+      >
+        <div
+          class="w-24 h-24 overflow-hidden border-2 border-black rounded-md shrink-0"
+        >
+          <a href="/user/{{ .ID }}">
+            <img
+              class="w-full h-full object-cover"
+              src="{{ .Avatar }}"
+              alt="avatar"
+            />
+          </a>
+        </div>
+        <div class="flex flex-col items-end flex-1 min-w-0">
+          <a
+            class="font-bold text-4xl hover:underline mb-auto w-full truncate text-right"
+            href="/user/{{ .ID }}"
+            >{{ .Username }}</a
+          >
+        </div>
+      </div>
+    </li>
+    {{ end }}
+  </ul>
+</div>
+{{ end }} {{ template "footer" }}

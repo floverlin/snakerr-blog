@@ -1,0 +1,73 @@
+{{ define "post card" }}
+<div class="flex flex-col border-2 border-black rounded-2xl p-4 w-full">
+  <div class="flex flex-col gap-4 items-center mb-4">
+    <div
+      class="w-full text-center border-b-2 border-dashed border-black pb-4 font-bold text-4xl"
+    >
+      {{ .Title }}
+    </div>
+    <div class="text-center text-xl __allow-links">{{ .Body }}</div>
+  </div>
+
+  <div
+    class="pt-2 px-2 flex flex-col items-center border-t-2 border-black bg-gradient-to-b from-slate-400 to-transparent"
+  >
+    <div class="w-full flex">
+      <a
+        class="hover:underline text-center mr-auto truncate"
+        href="/user/{{ .UserID }}"
+        >{{ .Author }}</a
+      >
+      <div
+        class="__island-like-pannel isl ml-auto"
+        data-id="{{ .ID }}"
+        data-likes="{{ .LikeCount }}"
+        data-liked="{{ .Liked }}"
+        data-dislikes="{{ .DislikeCount }}"
+        data-disliked="{{ .Disliked }}"
+      ></div>
+    </div>
+    <div class="w-full flex">
+      <div class="mr-auto text-center">
+        <div
+          class="__island-comment isl"
+          data-count="{{ .CommentCount }}"
+          data-post-id="{{ .ID }}"
+        ></div>
+      </div>
+      <div
+        class="flex items-center __locale-time"
+        data-unixtime="{{ .CreatedAt }}"
+      ></div>
+    </div>
+  </div>
+</div>
+
+{{ end }} {{ define "post list" }}
+<ul class="w-full space-y-4">
+  {{ range . }}
+  <li>{{ template "post card" .}}</li>
+  {{ end }}
+</ul>
+
+{{ end }} {{ define "paginate" }} {{ if or .Prev .Next }}
+<div class="flex justify-center gap-4 w-full font-sans text-base mb-4 lg:mb-8">
+  {{ if .Prev }}
+  <button
+    class="btn py-1 px-2"
+    onclick="document.location.href='/{{ .Addr }}?page={{ sub .Page 1 }}'"
+  >
+    {{ "<= " }}{{ sub .Page 1 }}
+  </button>
+  {{ end }}
+  <button class="btn py-1 px-8">{{ .Page }}</button>
+  {{ if .Next }}
+  <button
+    class="btn py-1 px-2"
+    onclick="document.location.href='/{{ .Addr }}?page={{ add .Page 1 }}'"
+  >
+    {{ add .Page 1 }}{{ " =>" }}
+  </button>
+  {{ end }}
+</div>
+{{ end }} {{ end }}

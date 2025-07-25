@@ -1,0 +1,24 @@
+{
+  "server": {
+    "timeouts": 5,
+    "websocket_ping_rate": 30,
+    "websocket_pong_timeout": 15,
+    "flash_timeout": 10,
+    "static_path": "static",
+    "uploads_path": "uploads",
+    "visual": {
+      "post_per_page": 5
+    }
+  },
+  "database": {
+    "path": "database",
+    "name": "data.db",
+    "migrations": "migrations"
+  },
+  "locales": {
+    "path": "locales"
+  },
+  "templates": {
+    "path": "templates"
+  }
+}

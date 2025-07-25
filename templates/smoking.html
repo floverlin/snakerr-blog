@@ -1,0 +1,52 @@
+{{ template "header" .Header }}
+<h1 class="title">{{ i18n .Locale "Smoking Room"}}</h1>
+
+<div class="content">
+  <span class="text-2xl text-center"
+    >Курилка временно закрыта, приносим свои извинения</span
+  >
+  <!-- <div
+    class="border-4 border-black rounded-xl w-full h-96 p-4 bg-slate-600 overflow-y-scroll mb-8"
+    id="smoke_chat-window"
+  >
+    <ul id="smoke_chat" data-no-messages='{{ i18n .Locale "No messages"}}'>
+      <li class="message">
+        <span>{{ i18n .Locale "No messages"}}</span>
+      </li>
+    </ul>
+  </div>
+
+  <div class="flex w-full px-8 justify-between mb-8">
+    <input
+      class="w-4/5"
+      id="smoke_input"
+      type="text"
+      placeholder="Write message"
+    />
+    <button class="btn px-2" id="smoke_send">{{ i18n .Locale "Send"}}</button>
+  </div>
+
+  <div class="flex justify-between w-full">
+    <div class="font-sans text-base flex flex-col gap-4">
+      <button class="btn px-4 py-2" id="smoke_connect">
+        {{ i18n .Locale "Connect"}}
+      </button>
+      <button class="btn px-4 py-2" id="smoke_disconnect">
+        {{ i18n .Locale "Disconnect"}}
+      </button>
+    </div>
+    <div
+      class="borser-2 border-black bg-slate-400 rounded-2xl h-full w-2/5 font-bold flex justify-center items-center"
+      style="color: red"
+      id="smoke_status"
+      data-connected='{{ i18n .Locale "Connected"}}'
+      data-disconnected='{{ i18n .Locale "Disconnected" }}'
+    >
+      {{ i18n .Locale "Disconnected"}}
+    </div>
+  </div> -->
+</div>
+
+<!-- <script src="/static/scripts/smoking.js?v={{ .Version }}"></script> -->
+
+{{ template "footer" }}

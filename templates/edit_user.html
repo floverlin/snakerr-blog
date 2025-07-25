@@ -1,0 +1,44 @@
+{{ template "header" .Header}}
+<h1 class="title">{{ i18n .Locale "Edit Profile" }}</h1>
+<div class="content">
+  <form class="flex flex-col gap-8 w-4/5 mb-8" method="post" autocomplete="off">
+    <input type="hidden" name="csrf_token" value="{{ .CSRFToken }}" />
+    <h2 class="text-center font-bold text-2xl">
+      {{ i18n .Locale "Username" }} {{ i18n .Locale "and" }} {{ i18n .Locale
+      "Description" }}
+    </h2>
+    <input
+      placeholder='{{ i18n .Locale "Username"}}'
+      name="username"
+      value="{{ .Username }}"
+      type="text"
+      required
+    />
+    <input
+      placeholder='{{ i18n .Locale "Description"}}'
+      id="description"
+      name="description"
+      value="{{ .Description }}"
+      type="text"
+      required
+    />
+    <button class="btn md:py-2 md:text-xl" type="submit">
+      {{ i18n .Locale "Submit"}}
+    </button>
+  </form>
+
+  <hr class="w-full border-b-2 border-black mb-8" />
+
+  <form
+    class="flex flex-col gap-8 w-4/5"
+    method="post"
+    action="/upload_avatar"
+    enctype="multipart/form-data"
+  >
+    <h2 class="text-center font-bold text-2xl">{{ i18n .Locale "Avatar" }}</h2>
+    <div class="__island-previever isl"></div>
+    <button class="btn md:py-2 md:text-xl">{{ i18n .Locale "Submit"}}</button>
+  </form>
+</div>
+
+{{ template "footer" }}

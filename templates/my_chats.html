@@ -1,0 +1,55 @@
+{{ template "header" .Header}} {{ if eq (len .Chats) 0 }}
+<h1 class="title">{{ i18n .Locale "No chats"}}</h1>
+{{ else }}
+<h1 class="title">{{ $title := .Header.Title }}{{ i18n .Locale $title }}</h1>
+<div class="content">
+  <ul class="w-full space-y-4">
+    {{ $locale := .Locale }} {{ range .Chats }}
+    <li>
+      <div
+        class="flex items-center border-2 gap-4 border-black bg-slate-200 rounded-2xl p-2 md:p-8 w-full"
+      >
+        <div
+          class="w-24 h-24 overflow-hidden border-2 border-black rounded-md shrink-0"
+        >
+          <a href="/chat/{{ .Dialogist.ID }}">
+            <img
+              class="w-full h-full object-cover"
+              src="{{ .Dialogist.Avatar }}"
+              alt="avatar"
+            />
+          </a>
+        </div>
+        <div class="flex flex-col items-end flex-1 min-w-0">
+          <a
+            class="font-bold text-4xl hover:underline mb-auto w-full truncate text-right"
+            href="/chat/{{ .Dialogist.ID }}"
+            >{{ .Dialogist.Username }}</a
+          >
+          {{ if .Readed }}
+          <span
+            class="border-b-2 border-green-600 md:text-xl"
+            style="color: green"
+            >{{ i18n $locale "no new messages" }}</span
+          >
+          {{ else }}
+          <span class="border-b-2 border-red-600 md:text-xl" style="color: red"
+            >{{ i18n $locale "new messages" }}</span
+          >
+          {{ end }}
+          <div
+            class="text-right __locale-time"
+            data-unixtime="{{ .UpdatedAt }}"
+          ></div>
+        </div>
+      </div>
+    </li>
+    {{ end }}
+  </ul>
+</div>
+{{ end }}
+
+<div class="mb-4 lg:mb-8 flex justify-center">
+  <a class="hover:underline text-white" href="/smoking">Старая курилка</a>
+</div>
+{{ template "footer" }}
