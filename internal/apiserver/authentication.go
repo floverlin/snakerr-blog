@@ -27,6 +27,8 @@ const (
 	userRole role = iota
 )
 
+const liveTime = (30 * 24 * time.Hour) * 2
+
 func (s *APIServer) handleRegister() http.HandlerFunc {
 	const op = "handle register"
 	return func(w http.ResponseWriter, r *http.Request) {
@@ -115,8 +117,8 @@ func (s *APIServer) handleLogin() http.HandlerFunc {
 				HttpOnly: true,
 				SameSite: http.SameSiteLaxMode,
 				Value:    tokenString,
-				Expires:  time.Now().Add(time.Hour * 24 * 60),
-				MaxAge:   int(time.Hour * 24 * 60 / time.Second),
+				Expires:  time.Now().Add(liveTime),
+				MaxAge:   int(liveTime / time.Second),
 			}
 			http.SetCookie(w, cookie)
 			http.Redirect(w, r, "/my_page", http.StatusSeeOther)
@@ -200,11 +202,10 @@ func parseToken(tokenString string, key string) (*jwt.Token, error) {
 }
 
 func generateUserToken(id uint64, role role, key string) (string, error) {
-	liveTime := time.Now().Add(48 * time.Hour).Unix()
 	claims := jwt.MapClaims{
 		"id":   id,
 		"role": role,
-		"exp":  liveTime,
+		"exp":  time.Now().Add(liveTime).Unix(),
 	}
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
 	return token.SignedString([]byte(key))
